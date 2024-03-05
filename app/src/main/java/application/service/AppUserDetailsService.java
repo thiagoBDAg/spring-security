@@ -2,9 +2,9 @@ package application.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.boot.security.UserDetails;
-import org.springframework.boot.security.UserDetailsService;
-import org.springframework.boot.security.UsernameNotFoundException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import application.model.User;
 import application.repository.UserRepository;
@@ -22,5 +22,9 @@ public class AppUserDetailsService implements UserDetailsService {
         }
         UserDetails userDetails = 
             org.springframework.security.core.userdetails.User.builder()
+                .username(user.getUsername())
+                .password(user.getPassword())
+                .roles("USER")
+                .build();
     }
 }
